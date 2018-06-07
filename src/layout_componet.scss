@@ -1,0 +1,92 @@
+$main_width:960px;
+
+
+#head{
+  text-align: center;
+  .logo-cnt{
+    .logo{
+      width: 244px;
+    }
+    height: 198px;
+    padding-top: 30px;
+    .account{
+        >span{
+          float: right;
+          width: 152px;
+          height: 36px;
+          line-height: 36px;
+          background-color: rgba(0, 0, 0, 0.1);
+          border-radius: 17px;
+          border: solid 1px rgba(40, 60, 80, 0.8);
+          cursor: pointer;
+          img{
+            width: 17px;
+            margin-left: 10px;
+          }
+          span{
+              font-size: 18px;
+              letter-spacing: 0px;
+          }
+        }
+    }
+  }
+  .navs{
+   
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top: solid 1px rgba(40, 60, 80, 0.8);
+    border-bottom: solid 1px rgba(40, 60, 80, 0.8);
+    .nav-container{
+      width:$main_width;
+      margin: 0 auto;
+      text-align: left;
+      .nav{
+        float: left;
+        width: 110px;
+        height: 80px;
+        line-height: 80px;
+        &:first-child{
+           width: 80px;
+          a{ 
+            img{
+              left:0;
+              transform: translate(0,-50%);
+            }
+          }
+        };
+        &:last-child{
+          a{ 
+            border-right: none;
+            img{
+            }
+          }
+        };
+        a{
+          display: inline-block;
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          height:40px;
+          margin-top: 20px;
+          border-right: solid 1px  rgba(255, 255, 255, 0.2);
+          img{
+            position: absolute;
+            width: 30px;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            &:hover{
+              
+            }
+          }
+        }
+        
+      }
+    }
+  }
+ 
+}
+
+#main{
+  width: 960px;
+  margin: 0 auto;
+}

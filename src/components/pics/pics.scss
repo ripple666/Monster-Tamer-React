@@ -1,0 +1,63 @@
+.my-select{
+	display: inline-block;
+	.cur-btn{
+		cursor: pointer;
+		padding:6px 36px 6px 10px;
+		background-color: #242c40;
+		border: solid 1px rgba(40, 60, 80, 0.8);
+		position: relative;
+		.select-icon{
+			background:url('../../assets/images/lower.png') center / 100% 100% no-repeat;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			right: 5px;
+			width: 18px;
+			height:11px;
+		}
+	}
+	.select-ul{
+		max-height: 110px;
+		overflow-y: scroll;
+		position: relative;
+		background-color: #242c40;
+		border: solid 1px rgba(40, 60, 80, 0.8);
+		li{
+			padding:6px 36px 6px 10px;
+			cursor: pointer;
+			&:hover{
+				color: #00BFDD;
+			}
+		}
+	}
+}
+
+.my-nav{
+	width: 100%;
+	ul{
+		line-height: 60px;
+		position: relative;
+		li{
+			float: left;
+			font-size: 24px;
+			color: #ffffff;
+			width: 130px;
+			text-align: center;
+			cursor: pointer;
+			 transition: color 0.3s 0.1s ease-out;
+			&:hover{
+				color: #fee285;
+			}
+		}
+		.bot-line{
+			display: inline-block;
+			width: 130px;
+			border-bottom: 2px solid #fee285;
+			position: absolute;
+			bottom: 0;
+			left:0;
+			transition: left 0.3s 0.1s linear;
+
+		}
+	}
+}
