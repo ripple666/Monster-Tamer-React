@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Pagination } from 'element-react'
 
 import {setCurNavStyle} from '../utils/api.js'
-import '../assets/styles/pages/market.scss'
 
 import {Myselect} from '../components/pics/select'
 import {Mynav} from '../components/pics/nav'
@@ -66,6 +65,8 @@ export class MyAssets extends Component {
 	    super(props);
 	    this.changeNav = this.changeNav.bind(this)
 	    this.changeFusionState = this.changeFusionState.bind(this)
+	    this.dragenCardBtnClick = this.dragenCardBtnClick.bind(this)
+	    this.medicineCardBtnClick = this.medicineCardBtnClick.bind(this)
 	    this.state={
 	    	isFusion:false,
 	    	dragens:[],
@@ -77,11 +78,13 @@ export class MyAssets extends Component {
 	    }
 	}
 
-	componentDidMount(){
+	componentWillMount(){
 		this.getDragens(1)
 		this.getMedicines(1)
-
-		setCurNavStyle(this.props.match.path)
+		
+	}
+	componentDidMount() {
+		setCurNavStyle('my-assets')
 	}
 
 	changeNav(id){ 
@@ -92,6 +95,13 @@ export class MyAssets extends Component {
 
 	pageChange(index){
 		console.log(index)
+	}
+
+	dragenCardBtnClick(id){
+		console.log(id)
+	}
+	medicineCardBtnClick(id){
+		console.log(id)
 	}
 
 	getDragens(){
@@ -240,31 +250,31 @@ export class MyAssets extends Component {
 	getMedicines(){
 		let medicines = [
 			{
+				id:0,
 				img:require('../assets/images/medicine/Big Power Booster.png'),
 				name:'Big Power Booster',
 				power:'30%',
 				time:'120MIN',
 				effect:'Power Boost',
-				price:'10.20',
-				id:0
+				price:'10.20'
 			},
 			{
+				id:1,
 				img:require('../assets/images/medicine/Medium Power Booster.png'),
 				name:'Medium Power Booster',
 				power:'20%',
 				time:'120MIN',
 				effect:'Power Boost',
-				price:'5.26',
-				id:1
+				price:'5.26'
 			},
 			{
+				id:2,
 				img:require('../assets/images/medicine/Small Power Booster.png'),
 				name:'Small Power Booster',
 				power:'10%',
 				time:'120MIN',
 				effect:'Power Boost',
-				price:'1.20',
-				id:2
+				price:'1.20'
 			}
 		]
 		this.setState({
@@ -280,7 +290,7 @@ export class MyAssets extends Component {
 				content= <div className="content clearfloat">
 					{
 						this.state.dragens.map((dragen) =>
-							<CardDragen isFusion={state.isFusion} key={dragen.id} dragen={dragen}   />
+							<CardDragen  dragenCardBtnClick={this.dragenCardBtnClick}   isFusion={state.isFusion} key={dragen.id} dragen={dragen}   />
 						)
 					}
 				</div>
@@ -288,7 +298,7 @@ export class MyAssets extends Component {
 			case 'item' :
 				content= <div className="content clearfloat">
 					{state.medicines.map((medicine) =>
-						<CardMedicine key={medicine.id}  medicine={medicine} />
+						<CardMedicine  medicineCardBtnClick={this.medicineCardBtnClick} key={medicine.id}  medicine={medicine} />
 					)}
 				</div>
 				break;

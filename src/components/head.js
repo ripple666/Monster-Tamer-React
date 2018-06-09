@@ -36,20 +36,20 @@ export class head extends Component {
 				<div className="navs">
 					<div className="nav-container clearfloat ">
 						{this.props.navs.map((nav) =>
-							<li  key={nav.path.split('/')[1] ? nav.path.split('/')[1] : 'market'} id={nav.name}  className="nav" >
+							<li  key={nav.path.split('/')[1] ? nav.path.split('/')[1] : 'market'} id={'nav-'+nav.name}  className="nav" >
 							  <Link to={`${nav.path}`}>
 							  	<i alt={nav.name} >{nav.icon}</i>
 							  </Link>
 							  <img alt="fire" className="x-mid" src={require('../assets/images/fire.png')} />
 							</li>
 						)}
-						<li id="warn"   className="nav" style={{float:'right',width:'60px'}}>
+						<li id="nav-warn"   className="nav" style={{float:'right',width:'60px'}}>
 							<Link  to={`/warn`}  style={{borderRight:'none'}} >
 								<i alt="warn">F</i>
 							</Link>
 							<img alt="fire" className="x-mid" src={require('../assets/images/fire.png')} />
 						</li>
-						<li id="tree"   className="nav" style={{float:'right',width:'60px'}}>
+						<li id="nav-tree"   className="nav" style={{float:'right',width:'60px'}}>
 							<Link to={`/tree`} style={{ borderRight:'none'}} >
 								<i alt="tree">G</i>
 							</Link>

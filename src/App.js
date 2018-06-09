@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './assets/styles/components/layout_componet.scss';
-
+import './assets/styles/pages/page.scss';
 import {head as Head} from './components/head'
 import {mainLayout as MainLayout} from './components/main_layout'
 import {Foot} from './components/foot'

@@ -11,9 +11,9 @@ export class Foot extends Component {
 						<Layout.Col span="18" className="left">
 							<div className="session_1">
 								<Link className="market" to={{
-								  pathname: '/roster/1',
+								  pathname: '/attacking/1',
 								  search: '?sort=name&id=17',
-								  hash: '',
+								  hash: '1',
 								  state: { fromDashboard: true }
 								}}><span>MARKET</span></Link>
 								<Link className="my-assets" to={'/my-assets'}><span>MY ASSETS</span></Link>

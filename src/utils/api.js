@@ -1,13 +1,17 @@
 export function setCurNavStyle(pathName){
-	['market','my-assets','attack','hatch','top','warn','tree'].forEach((v,i) =>{
+
+	['nav-market','nav-my-assets','nav-attack','nav-hatch','nav-top','nav-warn','nav-tree'].forEach((v,i) =>{
+			console.log(v)
 			let el = document.getElementById(v)
-			el.className = el.className.replace('active','')
+			if(el){
+				el.className = el.className.replace('active','')
+			}
+			
 		}
 	)
-
-	pathName = pathName.split('/')[1]
-
-	pathName = pathName ? pathName :'market'
-
-	document.getElementById(pathName).className += ' active'
+	console.log(pathName)
+	if(document.getElementById('nav-'+pathName)){
+		document.getElementById('nav-'+pathName).className += ' active'
+	}
+	
 }

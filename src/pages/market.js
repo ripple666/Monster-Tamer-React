@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Pagination } from 'element-react'
 
 import {setCurNavStyle} from '../utils/api.js'
-import '../assets/styles/pages/market.scss'
 
 import {Myselect} from '../components/pics/select'
 import {Mynav} from '../components/pics/nav'
@@ -63,7 +62,8 @@ export class Market extends Component {
 	constructor(props) {
 	    super(props);
 	    this.changeNav = this.changeNav.bind(this)
-	    this.changeNav = this.changeNav.bind(this)
+	    this.dragenCardBtnClick = this.dragenCardBtnClick.bind(this)
+	    this.medicineCardBtnClick = this.medicineCardBtnClick.bind(this)
 	    this.state={
 	    	dragens:[],
 	    	medicines:[],
@@ -71,15 +71,18 @@ export class Market extends Component {
 	    	currentPage:1,
 	    	pageSize:12,//每页显示的数量
 	    	total:50//总共多少页
-
 	    }
 	}
 
-	componentDidMount(){
+	componentWillMount(){
 		this.getDragens(1)
 		this.getMedicines(1)
 		
-		setCurNavStyle(this.props.match.path)
+		
+	}
+
+	componentDidMount() {
+		setCurNavStyle('market')
 	}
 
 	changeNav(id){ 
@@ -90,6 +93,12 @@ export class Market extends Component {
 
 	pageChange(index){
 		console.log(index)
+	}
+	dragenCardBtnClick(id){
+		console.log(id)
+	}
+	medicineCardBtnClick(id){
+		console.log(id)
 	}
 
 	getDragens(){
@@ -125,104 +134,7 @@ export class Market extends Component {
 				owner:'suerjoieawuguhagwiuejfoiew',
 				price:'1.20',
 				id:0
-			},
-			{
-				from:'market',
-				name:'triceratops',
-				type:'legendary',
-				buffs:['strong'], //龙的buff
-				status:[
-					{
-						name:'freeze',
-						time:'21:03'
-					},
-					{
-						name:'shield',
-						time:'21:26'
-					},
-					{
-						name:'strong',
-						time:'10:02'
-					}
-				],
-				onsale:true,
-				VG:'2023.02',
-				dragenImg:require('../assets/images/dragen_demo.png'),
-				property:{
-					luyck:52,
-					speed:18,
-					power:1,
-					agility:18
-				},
-				owner:'suerjoieawuguhagwiuejfoiew',
-				price:'1.20',
-				id:1
-			},
-			{
-				from:'market',
-				name:'triceratops',
-				type:'epic',
-				buffs:['strong'], //龙的buff
-				status:[
-					{
-						name:'freeze',
-						time:'21:03'
-					},
-					{
-						name:'shield',
-						time:'21:26'
-					},
-					{
-						name:'strong',
-						time:'10:02'
-					}
-				],
-				onsale:true,
-				VG:'2023.02',
-				dragenImg:require('../assets/images/dragen_demo.png'),
-				property:{
-					luyck:52,
-					speed:18,
-					power:1,
-					agility:18
-				},
-				owner:'suerjoieawuguhagwiuejfoiew',
-				price:'1.20',
-				id:2
-			},
-			{
-				from:'market',
-				name:'triceratops',
-				type:'elite',
-				buffs:['strong'], //龙的buff
-				status:[
-					{
-						name:'freeze',
-						time:'21:03'
-					},
-					{
-						name:'shield',
-						time:'21:26'
-					},
-					{
-						name:'strong',
-						time:'10:02'
-					}
-				],
-				onsale:true,
-				VG:'2023.02',
-				dragenImg:require('../assets/images/dragen_demo.png'),
-				property:{
-					luyck:52,
-					speed:18,
-					power:1,
-					agility:18
-				},
-				owner:'suerjoieawuguhagwiuejfoiew',
-				price:'1.20',
-				id:3
 			}
-
 		]
 		this.setState({
 			dragens:dragens
@@ -232,6 +144,7 @@ export class Market extends Component {
 	getMedicines(){
 		let medicines = [
 			{
+				id:0,
 				img:require('../assets/images/medicine/Big Power Booster.png'),
 				name:'Big Power Booster',
 				power:'30%',
@@ -240,6 +153,7 @@ export class Market extends Component {
 				price:'10.20 NAS'
 			},
 			{
+				id:1,
 				img:require('../assets/images/medicine/Medium Power Booster.png'),
 				name:'Medium Power Booster',
 				power:'20%',
@@ -248,6 +162,7 @@ export class Market extends Component {
 				price:'5.26 NAS'
 			},
 			{
+				id:2,
 				img:require('../assets/images/medicine/Small Power Booster.png'),
 				name:'Small Power Booster',
 				power:'10%',
@@ -269,7 +184,7 @@ export class Market extends Component {
 				content= <div className="content clearfloat">
 					{
 						this.state.dragens.map((dragen) =>
-							<CardDragen  key={dragen.id} dragen={dragen}   />
+							<CardDragen  dragenCardBtnClick={this.dragenCardBtnClick}    key={dragen.id} dragen={dragen}   />
 						)
 					}
 				</div>
@@ -277,7 +192,7 @@ export class Market extends Component {
 			case 'item' :
 				content= <div className="content clearfloat">
 					{state.medicines.map((medicine) =>
-						<CardMedicine  medicine={medicine} />
+						<CardMedicine  medicineCardBtnClick={this.medicineCardBtnClick} key={medicine.id}  medicine={medicine} />
 					)}
 				</div>
 				break;

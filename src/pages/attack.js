@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Pagination } from 'element-react'
 
 import {setCurNavStyle} from '../utils/api.js'
-import '../assets/styles/pages/market.scss'
 
 import {Myselect} from '../components/pics/select'
 import {Mynav} from '../components/pics/nav'
@@ -66,7 +65,8 @@ export class Attack extends Component {
 	constructor(props) {
 	    super(props);
 	    this.changeNav = this.changeNav.bind(this)
-	    this.changeNav = this.changeNav.bind(this)
+	    this.dragenCardBtnClick = this.dragenCardBtnClick.bind(this)
+	    this.medicineCardBtnClick = this.medicineCardBtnClick.bind(this)
 	    this.state={
 	    	dragens:[],
 	    	medicines:[],
@@ -79,10 +79,11 @@ export class Attack extends Component {
 	}
 
 	componentDidMount(){
+		setCurNavStyle('attack')
+	}
+	componentWillMount() {
 		this.getDragens(1)
 		this.getMedicines(1)
-		
-		setCurNavStyle(this.props.match.path)
 	}
 
 	changeNav(id){ 
@@ -95,6 +96,12 @@ export class Attack extends Component {
 		console.log(index)
 	}
 
+	dragenCardBtnClick(id){
+		console.log(id)
+	}
+	medicineCardBtnClick(id){
+		console.log(id)
+	}
 	getDragens(){
 		let dragens = [
 			{
@@ -128,104 +135,7 @@ export class Attack extends Component {
 				owner:'suerjoieawuguhagwiuejfoiew',
 				price:'1.20',
 				id:0
-			},
-			{
-				from:'attack',
-				name:'triceratops',
-				type:'common',
-				buffs:['strong'], //龙的buff
-				status:[
-					{
-						name:'freeze',
-						time:'21:03'
-					},
-					{
-						name:'shield',
-						time:'21:26'
-					},
-					{
-						name:'strong',
-						time:'10:02'
-					}
-				],
-				onsale:true,
-				VG:'2023.02',
-				dragenImg:require('../assets/images/dragen_demo.png'),
-				property:{
-					luyck:52,
-					speed:18,
-					power:1,
-					agility:18
-				},
-				owner:'suerjoieawuguhagwiuejfoiew',
-				price:'1.20',
-				id:1
-			},
-			{
-				from:'attack',
-				name:'triceratops',
-				type:'common',
-				buffs:['strong'], //龙的buff
-				status:[
-					{
-						name:'freeze',
-						time:'21:03'
-					},
-					{
-						name:'shield',
-						time:'21:26'
-					},
-					{
-						name:'strong',
-						time:'10:02'
-					}
-				],
-				onsale:true,
-				VG:'2023.02',
-				dragenImg:require('../assets/images/dragen_demo.png'),
-				property:{
-					luyck:52,
-					speed:18,
-					power:1,
-					agility:18
-				},
-				owner:'suerjoieawuguhagwiuejfoiew',
-				price:'1.20',
-				id:2
-			},
-			{
-				from:'attack',
-				name:'triceratops',
-				type:'common',
-				buffs:['strong'], //龙的buff
-				status:[
-					{
-						name:'freeze',
-						time:'21:03'
-					},
-					{
-						name:'shield',
-						time:'21:26'
-					},
-					{
-						name:'strong',
-						time:'10:02'
-					}
-				],
-				onsale:true,
-				VG:'2023.02',
-				dragenImg:require('../assets/images/dragen_demo.png'),
-				property:{
-					luyck:52,
-					speed:18,
-					power:1,
-					agility:18
-				},
-				owner:'suerjoieawuguhagwiuejfoiew',
-				price:'1.20',
-				id:3
 			}
-
 		]
 		this.setState({
 			dragens:dragens
@@ -235,6 +145,7 @@ export class Attack extends Component {
 	getMedicines(){
 		let medicines = [
 			{
+				id:0,
 				img:require('../assets/images/medicine/Big Power Booster.png'),
 				name:'Big Power Booster',
 				power:'30%',
@@ -243,6 +154,7 @@ export class Attack extends Component {
 				price:'10.20 NAS'
 			},
 			{
+				id:1,
 				img:require('../assets/images/medicine/Medium Power Booster.png'),
 				name:'Medium Power Booster',
 				power:'20%',
@@ -251,6 +163,7 @@ export class Attack extends Component {
 				price:'5.26 NAS'
 			},
 			{
+				id:2,
 				img:require('../assets/images/medicine/Small Power Booster.png'),
 				name:'Small Power Booster',
 				power:'10%',
@@ -266,13 +179,14 @@ export class Attack extends Component {
 
 	render() {
 		let state = this.state
+		// let props = this.props
 		let content ;
 		switch(state.curTab){
 			case nav1:
 				content= <div className="content clearfloat">
 					{
 						this.state.dragens.map((dragen) =>
-							<CardDragen  key={dragen.id} dragen={dragen}   />
+							<CardDragen dragenCardBtnClick={this.dragenCardBtnClick}  key={dragen.id} dragen={dragen}   />
 						)
 					}
 				</div>
@@ -280,7 +194,7 @@ export class Attack extends Component {
 			case nav2 :
 				content= <div className="content clearfloat">
 					{state.medicines.map((medicine) =>
-						<CardMedicine  medicine={medicine} />
+						<CardMedicine medicineCardBtnClick={this.medicineCardBtnClick} key={medicine.id}  medicine={medicine} />
 					)}
 				</div>
 				break;
