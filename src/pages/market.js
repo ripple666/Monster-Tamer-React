@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import { Pagination } from 'element-react'
 
-import {setCurNavStyle} from '../utils/api.js'
+import {setCurNavStyle,processDragen,buyDragen,rmLoading,addLoading} from '../utils/api.js'
+import {medicines,medicinesObj} from '../assets/data/data.js'
 
 import {Myselect} from '../components/pics/select'
 import {Mynav} from '../components/pics/nav'
 import {CardDragen ,CardMedicine} from '../components/card.js'
 
+
+import { MessageBox,Message } from 'element-react';
+
+
+
+import createHashHistory from 'history/createHashHistory'
+const history = createHashHistory()
+
+let contractAddress = window.contractAddress
+let call = window.call
+let pay = window.pay
+let receipt = window.receipt
+let callArgs = new Array()
+
+let $ = window.$
 
 
 
@@ -75,14 +91,58 @@ export class Market extends Component {
 	}
 
 	componentWillMount(){
-		this.getDragens(1)
-		this.getMedicines(1)
-		
 		
 	}
 
 	componentDidMount() {
+		addLoading()
 		setCurNavStyle('market')
+		let that = this;
+
+		callArgs = new Array()
+		callArgs[0] = 0
+		callArgs[1] = {sl:'1'}
+		callArgs[2] = 1000000
+		call(contractAddress, 0, 'getMConditions',callArgs, (resp)=>{
+			let result = JSON.parse(resp.result)
+
+			var idData = result.m;
+			
+			var dragens = []
+			for(let key in idData){
+				// if(idData[key].ow === window.userAddress){  //过滤已经死亡的龙
+				// 	return
+				// }
+				dragens.push(processDragen(idData[key],key,'market'))
+			}
+			
+			that.setState({
+				Marketdragens:dragens
+			})
+
+			// this.setState({
+			// 	dragens:dragens
+			// })
+			this.getDragens(1)
+			this.getMedicines(1)
+			rmLoading()
+		})
+	}
+
+
+	getDragens(index){
+		
+		let all_log = this.state.Marketdragens.slice((index - 1) * 12, index * 12)
+        this.setState({
+			dragens:all_log,
+			total:this.state.Marketdragens.length
+		})
+	}
+
+	getMedicines(){
+		this.setState({
+			medicines:medicines
+		})
 	}
 
 	changeNav(id){ 
@@ -94,87 +154,21 @@ export class Market extends Component {
 	pageChange(index){
 		console.log(index)
 	}
-	dragenCardBtnClick(id){
+	dragenCardBtnClick(id,price){
 		console.log(id)
+		buyDragen(id,price)
 	}
 	medicineCardBtnClick(id){
 		console.log(id)
+		let price = medicinesObj[id].price
+		callArgs = new Array()
+	  	callArgs[0] = id
+
+	    pay(contractAddress, price, 'buySC',callArgs, (resp)=>{
+
+	    })
 	}
 
-	getDragens(){
-		let dragens = [
-			{
-				from:'market',
-				name:'triceratops',
-				type:'common',
-				buffs:['shield','strong'], //龙的buff
-				status:[
-					{
-						name:'freeze',
-						time:'21:03'
-					},
-					{
-						name:'shield',
-						time:'21:26'
-					},
-					{
-						name:'strong',
-						time:'10:02'
-					}
-				],
-				onsale:true,
-				VG:'2023.02',
-				dragenImg:require('../assets/images/dragen_demo.png'),
-				property:{
-					luyck:52,
-					speed:18,
-					power:1,
-					agility:18
-				},
-				owner:'suerjoieawuguhagwiuejfoiew',
-				price:'1.20',
-				id:0
-			}
-		]
-		this.setState({
-			dragens:dragens
-		})
-	}
-
-	getMedicines(){
-		let medicines = [
-			{
-				id:0,
-				img:require('../assets/images/medicine/Big Power Booster.png'),
-				name:'Big Power Booster',
-				power:'30%',
-				time:'120MIN',
-				effect:'Power Boost',
-				price:'10.20 NAS'
-			},
-			{
-				id:1,
-				img:require('../assets/images/medicine/Medium Power Booster.png'),
-				name:'Medium Power Booster',
-				power:'20%',
-				time:'120MIN',
-				effect:'Power Boost',
-				price:'5.26 NAS'
-			},
-			{
-				id:2,
-				img:require('../assets/images/medicine/Small Power Booster.png'),
-				name:'Small Power Booster',
-				power:'10%',
-				time:'120MIN',
-				effect:'Power Boost',
-				price:'1.20 NAS'
-			}
-		]
-		this.setState({
-			medicines:medicines
-		})
-	}
 
 	render() {
 		let state = this.state
@@ -203,13 +197,10 @@ export class Market extends Component {
 		}
 		return (
 			<div id="market">
-				<div className="top">
+				<div className="main-top">
 					<div className="container_960px">
 						<Mynav nav={nav} onNav={this.changeNav} ></Mynav>
-						<div className="top-right">
-							<span className="label">ORDER:</span>
-							<Myselect select={select} onSelect={changeSelect}></Myselect>
-						</div>
+
 					</div>
 				</div>
 				<div className="container_960px">
@@ -224,3 +215,9 @@ export class Market extends Component {
 		);
 	}
 }
+
+
+// <div className="top-right">
+// 	<span className="label">ORDER:</span>
+// 	<Myselect select={select} onSelect={changeSelect}></Myselect>
+// </div>

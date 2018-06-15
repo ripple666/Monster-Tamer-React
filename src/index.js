@@ -10,7 +10,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 
 import { HashRouter } from 'react-router-dom'
+import { i18n } from 'element-react'
+import locale from 'element-react/src/locale/lang/en'
 
+i18n.use(locale);
 
 ReactDOM.render((
 <HashRouter >

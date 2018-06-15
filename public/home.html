@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="author" content="ripple">
+    <meta name="email" content="651632406@qq.com">
+    <meta name="github" content="https://github.com/ripple-xaz">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400|Saira+Condensed:300,400|Open+Sans|300,400|Helvetica:100,300,400" rel="stylesheet">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Monster Tamer</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./js/nebulas.js"></script>
+    <script src="./js/nebPay.js"></script>
+    
+    <script src="./js/nasApi.js"></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <style>
+      #home_01{
+        height: 850px;
+        background: url('assets/img/home-01-bg.png') center/cover no-repeat;
+        text-align: center;
+      }
+      @font-face {
+			    font-family: 'Copperplate-Bold';
+			    font-style: normal;
+			    font-stretch: normal;
+			    src: local('LithosPro-Black'), url(./assets/font/Copperplate-Bold-03.woff2) format('woff2');
+			    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+			}
+			/*fonts*/
+			@font-face {
+			    font-family: 'Copperplate-Regular';
+			    font-style: normal;
+			 font-stretch: normal;
+			    src: local('LithosPro-Regular'), url(./assets/font/Copperplate-Regular-01.woff2) format('woff2');
+			    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+			}
+			*{
+				font-family: Copperplate-Bold;
+			}
+      .logo{
+        width: 300px;
+        height: 160px;
+        margin-top: 30px;
+      }
+      .tit_01{
+        margin-top: 10px;
+      }
+      .home_01_1{
+      	background: url(assets/images/d1.png) center/cover no-repeat;
+      	width: 959px;
+			height: 58px;
+			margin: 0 auto;
+			margin-top: 10px;
+			font-family:Copperplate-Bold;
+			color: #fcef9b;
+			line-height: 58px;;font-size: 18px;
+      }
+      .home_01_2{
+      	margin:24px auto  42px;
+      	width: 940px;
+				height: 74px;
+        position: relative;
+				border: solid 1px #ffffff;
+				line-height: 74px;
+				overflow: hidden;
+      }
+      .home_01_2 img{
+      	float: left; 
+      	margin-left: 20px;
+      	margin-right: 20px;  
+      	margin-top: 22px;      
+      }
+      .home_01_2 p{
+      	float: left;
+      	font-size: 20px;
+      	color: white;
+      	margin-top: 0;
+        position: absolute;
+        left:60px;
+      	margin-bottom: 0;
+      }
+      .home_01_3{
+      	width: 940px;
+      	height: 251px;
+      	overflow: hidden;
+      	margin: 0 auto;
+      }
+      .home_01_3_left{
+      	float: left;
+      }
+      #home_01_3_right{
+      	float: left;
+      	width: 440px;
+      	margin-left: 68px;
+      	text-align: left;
+      }
+      #home_01_3_right p{
+      	font-size: 21px;.
+      	line-height: 30px;
+      	color: #ffffff;
+      	font-family:Copperplate-Bold;
+      }
+       #home_01_3_right div{
+       	background: url(assets/img/d3.png) center/cover no-repeat;
+       	width: 440px;
+				height: 48px;
+				line-height: 48px;
+	color: #ffffff;
+	font-family:Copperplate-Bold;
+	text-align: center;
+	font-size: 22px;
+       }
+       #home_02{
+       	background: url(assets/img/home-02-bg.png) center/cover no-repeat;
+       	margin: 0 auto;
+       	height: 364px;
+       	overflow: hidden;
+       }
+       #home_02_1{
+       	width: 925px;
+       	height: 245px;
+       	margin: 0 auto;
+       }
+       #home_02_left{
+       	width: 476px;
+       	font-size: 38px;
+       	color:#f5ca65;
+       	line-height: 36px;
+       	float: left;
+       	margin-top: 24px;
+       }
+       #home_02_left p{
+       	margin-top: 10px;
+       	margin-bottom: 10px;
+       }
+       #home_02_left span{
+       	display: block;
+       	width: 476px;
+       	font-size: 20px;
+       	line-height: 24px;
+       }
+       #home_02_1 img{
+       	float: left;
+       	width: 404px;
+	height: 245px;
+	margin-left: 35px;
+	margin-top: 74px;
+       }
+       #home_03{
+       	height: 2320px;
+       	background: url(assets/img/home-03-bg.jpg) center/cover no-repeat;
+       }
+       #home_03_1{
+       	width: 960px;
+       	margin: 0 auto;
+       	overflow: hidden;
+       }
+       .howtoplay{
+       	margin-top: 50px;
+       	margin-bottom: 36px;
+       }
+       .howtoplay img{
+       	vertical-align: middle;
+       }
+       .howtoplay span{
+       	margin-left: 40px;
+       	margin-right: 40px;
+       	vertical-align: middle;
+       	display: inline-block;
+       	color: #ffad3e;
+       	font-size: 38px;
+       	line-height: 18px;
+       }
+       .home_03_1_left,.home_03_1_right{
+       	background: url(assets/img/c2.png) center/cover no-repeat;
+       	width: 460px;
+	height: 560px;
+	float: left;
+	text-align: center;
+       }
+       .home_03_1_right{
+       	background: url(assets/img/c3.png) center/cover no-repeat;
+       	margin-left: 40px;
+       }
+       .c1_title{
+       	color: #f5ca65;
+       	font-size: 30px;
+       	line-height: 30px;
+       	margin-top: 40px;
+       	margin-bottom: 30px;
+       }
+       .c2_title{
+       	t-size: 18px;
+					line-height: 24px;
+					color: #ffffff;
+       }
+       .home_03_1_right .c1_title{
+       	margin-top: 364px;
+       }
+       .cc3{
+       	width: 100%;
+       	margin-top: 63px;
+       	margin-bottom: 40px;
+       	font-size: 30px;
+       	line-height: 30px;
+		letter-spacing: 0px;
+		color: #f5ca65;
+		text-align: center;
+			height: 18px;
+			float: left;
+       }
+       .cc4,.cc5{
+       	margin: 0;
+       	float: left;
+       	font-size: 22px;
+       	line-height: 24px;
+				letter-spacing: 0px;
+				color: #ffffff;
+				width: 100%;
+				text-align: center;
+       }
+       .cc5{
+       	font-size: 16px;
+       }
+       .cc6{
+       	float: left;
+       	margin-bottom: 37px;
+       	margin-top: 25px;
+       }
+       .cc7{
+       	float: left;
+       	width: 481px;
+       	height: 424px;
+       }
+       .cc7_1{
+       	font-size: 22px;
+       	line-height: 24px;
+       	color: #ffffff;
+       	margin: 0;
+       }
+       .cc7_2{
+       	margin: 0;
+       	font-size: 16px;
+       	color: #ffffff;
+       }
+       .cc7_3{
+       	margin-top: 27px;
+       }
+       .cc8{
+       	float: left;
+       	margin-left: 19px;
+       }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      YOU NEED TO ENABLE JAVASCRIPT TO RUN THIS APP.
+    </noscript>
+    <div id="root">
+        <div id="home_01">
+            <div><img src="assets/img/logo.png"/></div>
+            <div class="home_01_1">COLLECT, GROW AND TRADE MONSTER IN THE NEW BLOCKCHAIN GAME ON SMART CONTRACT</div>
+            <div style="font-size: 24px;color: #fff;margin-top: 80px;">
+              ENTER MONSTER TAMER
+            </div>
+            <div class="home_01_2">
+            	<img src="assets/img/jintan.png"/>
+            	<p>
+            		please <span style="color:#5ef07e;"> UNLOCK YOUR NEBULAS WALLET </span>AND MAKE SURE YOU ARE  <span style="color:#5ef07e;"> LOGGED IN </span>.
+            	</p>
+            </div>
+            <div style="margin-top: 20px;" class="home_01_3">
+            	<img src="assets/img/d2.png"/ class="home_01_3_left">
+            	<div id="home_01_3_right">
+            		<p>MONSTER TAMER GAME REQUIRES NEBULAS BROWSER EXTENSION THAT IS AVAILABLE AS PLUG IN FOR GOOGLE CHROME.</p>
+            		<a href="https://github.com/nebulasio/WebExtensionWallet" target="_blank"><div>
+            			DOWNLOAD NEBULAS EXTENSION
+            		</div></a>
+            	</div>
+            </div>
+        </div>
+        <div id="home_02">
+        	<div id="home_02_1">
+        			<div id="home_02_left">
+		        		<p>WHAT IS </p>
+		        		<p>MONSTER TAMER?</p>
+		        		<span>
+		        			A PEER-TO-PEER (P2P) PLAYER-VERSUS-PLAYER (PVP) GAME FOR GROWING, FIGHTING AND TRADING UNIQUE DIGITAL MONSTER WITH COMMUNITY-DRIVEN ECONOMY AND IMMUTABLE GAMING ASSETS BASED ON SMART CONTRACTS RUNNING ON THE NEBULAS BLOCKCHAIN.
+		        		</span>
+		        	</div>
+		        	<img src="assets/img/e1.png"/>
+        	</div>
+        	
+        </div>
+        <div id="home_03">   
+        	<div id="home_03_1">
+        		<div class="howtoplay">
+        			<img src="assets/img/line.png"/>
+        			<span>
+        				HOW TO PLAY?
+        			</span>
+        			<img src="assets/img/line.png"/>
+        			
+        		</div>
+        		<div class="home_03_1_left">
+        			<p class="c1_title">1.GET MONSTER EGGS</p>
+        			<p class="c2_title">MONSTER TAMER FEATURES OPEN MARKET WHERE PLAYERS CAN TRADE MONSTERS. PRICE IS DEFINED BY SUPPLY AND DEMAND AND MAY BE INFLUENCED BY CRYPTO MONSTER VP, PARAMETERS AND RARITY.</p>
+        		</div>
+        		<div class="home_03_1_right">
+        			<p class="c1_title">2.HATCH</p>
+        			<p class="c2_title">MONSTER TAMER GIVES ONE RANDOM CRYPTO MONSTER FOR FREE, PLAYER CAN USE 0.01 NAS TO BUY MONSTER EGG AND USE YOUR INTEGRATION TO REDEEM THE SPECIAL EGG AS WELL.</p>
+        		</div>
+        		<p class="cc3">3.TRANSFORM BY 2 WAYS</p>
+        		<p class="cc4">A.FUSION </p>
+        		<p class="cc5">WHEN THE SAME RACE MONSTER FUSED TOGETHER, LUK AND VP WILL BE IMPROVED, FOR DIFFERENT MONSTERS, ONLY VP AVAILABLE.</p>
+        		<img src="assets/img/c4.png" class="cc6"/>
+        		<p class="cc4">B.DUEL </p>
+        		<p class="cc5">GROWING YOUR CRYPTO MONSTER VP BY ATTACK OPPONENTS AND TAKE THE LEADERSHIP IN MONSTER PARK DECENTRALIZED FOOD CHAIN.</p>
+        		<img src="assets/img/c6.png" class="cc6"/>
+        		<p class="cc3">4.MORE EXCITING WAYS TO PLAY</p>
+        		<div class="cc7">
+        			<p class="cc7_1">3V3 TEAM BATTLE</p>
+        			<p class="cc7_2">BUILD AN ARMY OF MONSTERS, THREE MONSTERS CAN FIGHT AMONG A PARTY, THE WINNER WILL ACHIEVE TEAM REPUTATION AND INTEGRATION. </p>
+        			<p class="cc7_1 cc7_3">BOOSTER MARKET</p>
+        			<p class="cc7_2"> THERE ARE FIVE KINDS OF BOOSTERS ON THE GLOBAL OPEN MARKET, PLAYERS COULD CHOOSE [POWER], [SPEED], [AGILITY],[DEFENSE] BOOSTERS TO IMPROVE RELATED PARAMETERS, THE RESURRECTION PROP COULD REANIMATE YOUR MONSTER.</p>
+        		</div>
+        		<img src="assets/img/c7.png" class="cc8"/>
+        	</div>
+        </div>
+    </div>              
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+
+  </body>
+</html>

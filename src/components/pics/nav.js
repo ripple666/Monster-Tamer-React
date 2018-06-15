@@ -23,7 +23,7 @@ export class Mynav extends Component {
 				<ul className="clearfloat">
 				{
 					this.props.nav.navs.map((nav,idx) =>
-						<li onClick={(e) =>this.navto(idx,nav.id)} key={nav.id}>
+						<li className='noselect' onClick={(e) =>this.navto(idx,nav.id)} key={nav.id}>
 							{nav.name}
 						</li>
 					)

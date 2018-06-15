@@ -7,7 +7,16 @@ import {mainLayout as MainLayout} from './components/main_layout'
 import {Foot} from './components/foot'
 
 
+import createHashHistory from 'history/createHashHistory'
+const history = createHashHistory()
+const pathToRegexp = require('path-to-regexp')
+let contractAddress = window.contractAddress
+let call = window.call
+let pay = window.pay
+let receipt = window.receipt
+let callArgs = new Array()
 
+let $ = window.$
 // import { Button } from 'element-react';
 // import 'element-theme-default';
 
@@ -60,12 +69,28 @@ class App extends Component {
   	constructor(props) {
 	    super(props);
 	    this.state={
-	    	
 	    }
 	}
 
 
+	componentWillMount() {
+			
+			
+		call(contractAddress,0,'allInOne',callArgs,(data)=>{
+			let result = JSON.parse(data.result)
 
+			window.bkctime = result.now*1000
+			window.interal = result.interal
+			window.freeCnt = result.free_cnt
+			window.userAddress = result.me
+
+			if(result.free_cnt == 1){
+				$('#hach-free-egg').addClass('disable')
+			}
+			document.getElementById('head-integral').innerHTML= result.interal
+			document.getElementById('nick-name').innerHTML = result.me
+		})
+	}
 	render() {
 	    return (
 	      <div className="App">

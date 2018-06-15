@@ -18,13 +18,15 @@ $main_width:960px;
     .logo{
       width: 244px;
     }
-    height: 198px;
+    height: 240px;
     padding-top: 30px;
     .account{
-        >span{
+      position: relative;
+        >span:first-child{
           float: right;
-          width: 152px;
+          // width: 152px;
           height: 36px;
+          padding:0 20px;
           line-height: 36px;
           background-color: rgba(0, 0, 0, 0.1);
           border-radius: 17px;
@@ -38,6 +40,14 @@ $main_width:960px;
               font-size: 18px;
               letter-spacing: 0px;
           }
+        }
+        >span:nth-child(2){
+           position: absolute;
+            left: 880px;
+            top: 50px;
+            img{
+              margin-right: 6px;
+            }
         }
     }
   }
@@ -113,7 +123,6 @@ $main_width:960px;
   }
 }
 
-
 #foot{
   margin-top: 56px;
   height: 109px;
@@ -128,6 +137,11 @@ $main_width:960px;
   .content{
     width:$main_width;
     margin: 0 auto;
+    .about{
+      span{
+        margin-right: 10px;
+      }
+    }
     .left{
       .session_1{
 
@@ -142,7 +156,9 @@ $main_width:960px;
           }
         }
         .right{
+            text-align: left;
           .rights{
+
             margin-top: 10px;
           }
         }
@@ -150,18 +166,19 @@ $main_width:960px;
 
     }
     .right{
-        
+        float: right;
+        text-align: right;
     }
   }
 }
 
-.card-Dragen,.card-Mdicine{
+.card-Dragen,.card-Mdicine,.modal-card{
     .session_3{
       position: relative;
       margin-top: 30px;
       height: 90px;
       .properties{
-        width: 220px;
+        width: 255px;
         
         li{
           border-top: 1px solid rgba(255,255,255,0.2);
@@ -201,6 +218,12 @@ $main_width:960px;
         transition: background 0.3s 0.1s  ease-out;
         &.assets_btn{
           line-height: 60px;
+          width: 130px;
+          margin-left: 0 !important;
+          &:last-child{
+              background-color: #a96d11;
+          }
+          display: inline-block;
         }
         &.attack_btn{
           margin-left: 65px;
@@ -224,7 +247,8 @@ $main_width:960px;
     }
 }
 
-.card-Dragen{
+.card-Dragen,.modal-card{
+  
   position: relative;
   margin-top:40px;
   &.assets{
@@ -236,14 +260,22 @@ $main_width:960px;
         margin-right: 0 !important;
       }
     }
+    .session_4 {
+      ul.assets_btn{
+        margin-left: 20px;margin-right: 10px;
+      }
+    }
     .status{
       display: flex;
       width: 220px;
+      height: 40px;
+      line-height: 40px;
       margin:0 auto;
-      margin-bottom: 20px;
+      margin-bottom: 0px;
       >span{
         flex:1;
         img{
+          width: 15px;
           margin-right: 6px;
         }
       }
@@ -285,6 +317,7 @@ $main_width:960px;
     }
     .shield{
       bottom: 59px;
+      width: 230px;
     }
     .vg{
       bottom: -10px;
@@ -305,7 +338,11 @@ $main_width:960px;
   }
 }
 
-#attack,#market,#assets{
+
+/**
+ * 恐龙卡片滑动样式，每个恐龙卡片下面分割线
+ */
+#attack,#market,#assets,#hatched,#top{
   .card-Dragen{
     &:hover{
        background-color: rgba(0,0,0,.2);
@@ -322,8 +359,10 @@ $main_width:960px;
   }
 }
 
-
-#attacking,#attacked{
+/**
+ * 战斗恐龙卡片战斗结果
+ */
+#attacking,#attacked,#multi-attacking,#multi-attacked{
    .session_2{
       .shield{
         bottom: 69px;
@@ -345,8 +384,71 @@ $main_width:960px;
    }
     
 }
+/**
+ * 恐龙孵化状态
+ */
+#hatched{
+  .card-Dragen{
+    margin-bottom: 20px;
+    &:hover{
+       background-color: transparent;
+    }
+    &:last-child:after{
+      content: '';
+      width: 100%;
+      height: 1px;
+      right: 0;
+      position: absolute;
+      bottom: -20px;
+      border-bottom: 0.5px solid transparent;
+    }
+  }
+}
+/**
+ * 恐龙排行卡片样式
+ */
+#top{
+  .card-Dragen{
+    margin-top: 0;
 
+    &:hover{
+       background-color: transparent;
+    }
+    .session_1{
+      text-align: left;
+      padding-left:30px;
+    }
+    .session_2{
+      height: 94px;
+      cursor: auto;
+      .vg{
+        left:31px;
+        text-align: left;
+        transform: translateX(0);
+        .tag{
+          margin-bottom: 20px;
 
+        }
+      }
+    }
+    .session_4{
+      padding-left: 30px;
+      color: #8fa4ab;
+      font-size: 14px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    &:last-child:after{
+      content: '';
+      width: 100%;
+      height: 1px;
+      right: 0;
+      position: absolute;
+      bottom: -20px;
+      border-bottom: 0.5px solid transparent;
+    }
+  }
+}
 
 
 .card-Mdicine{
@@ -373,7 +475,7 @@ $main_width:960px;
   }
   .session_3{
       .properties{
-        width: 261px;
+        // width: 275px;
       }
   }
   .session_4{
@@ -383,6 +485,195 @@ $main_width:960px;
     font-size: 24px;
   }
 }
+
+
+.Card-multi-dragen{
+  margin-bottom: 20px;
+  width: 960px;
+  background-color: #243a56;
+  height: 260px;
+  padding-top: 20px;
+  >div{
+    float: left;
+    &.left{
+      width: 230px;
+      margin-left: 40px;
+      >div{
+        display: flex;
+        margin-bottom: 10px;
+        img{
+          margin-right: 10px;
+          width: 34px;
+          height: 30px;
+          margin-top: 4px;
+        }
+        >div{
+          font-size: 14px;
+          color: #b08d65;
+          &>div:first-child{
+            color: #fff;
+            font-size: 24px;
+          }
+        }
+        .attack_btn{
+          box-shadow: 1px 1px 1px #000;
+          &:hover{
+            background-color: rgba(158, 33, 33,0.75);
+          }
+        }
+      }
+    }
+    &.mid{
+       display: flex;
+      >div{
+
+        img.pic{
+          width: 172px;
+          height: 178px;
+        }
+      }
+    }
+  }
+}
+
+
+.modal.modal-fixed-footer{
+  width: 1030px;
+  background-color: #1c304a;
+  color: #fff !important;
+  .modal-content{
+    padding: 0;
+    overflow-y: hidden;
+    #modal-title{
+      line-height: 80px ;
+      text-align: center;
+      color: #e2b61f;
+      font-size: 30px;
+      background-color: #1c304a;
+    }
+    #modal-content{
+      
+      #tit{
+        height: 70px;
+        background-color: #1f3552;
+        font-size: 20px;
+        text-align: center;
+        line-height: 70px;
+      }
+      #cont{
+        padding-left: 10px;
+        padding-top: 10px;
+        height: 440px;
+        overflow-y: scroll;
+
+      }
+    }
+
+  }
+   .modal-footer{
+      background-color: transparent;
+      text-align: center;
+      a{
+        background-color: #208e37;
+        color: #fff;
+        float: none;
+      }
+   }
+}
+.modal-card{
+  position: relative;
+  width: 490px;
+  height: 250px;
+  float: left;
+  margin-right: 10px;
+  background-color: #243a56;
+  &:nth-child(2n){
+    margin-right: 0;
+  }
+}
+.modal-multi-dragen{
+  position: relative;
+  cursor: pointer;
+}
+.modal-card.active:after,.modal-multi-dragen.active:after{
+  content: '';
+  position: absolute;
+  width:35px;
+  height:36px;
+  right:0;
+  bottom: 0;
+  background:url('../../images/check.png') center/cover no-repeat;
+  
+}
+.modal-card.active,.modal-multi-dragen.active{
+  border: 1px solid #289a48;
+}
+
+.modal-card{
+  cursor: pointer;
+  >div{
+    float: left;
+    
+    &.session_2{
+      height: 100%;
+      position: absolute;
+      width: 240px;height: 100%;
+      right: 0;
+      top: 0;
+      .dragen{
+        margin-top: 0;
+      }
+    }
+    &.session_3{
+      position: absolute;
+      height: 100%;
+      left: 0;
+      top: 0;
+      width: 250px;
+      box-sizing: border-box;
+      padding-left: 20px;
+      .vg{
+        display: inline-block;
+        width: 100%;
+        font-size: 20px;
+        text-align: left;
+        .tag{
+          display: inline-block;
+          padding:4px 10px;
+          margin:10px 0;
+        }
+      }
+      ul{
+        
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .el-pagination{
@@ -411,6 +702,28 @@ $main_width:960px;
     background-color: transparent;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .my-loading{

@@ -24,6 +24,19 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Monster Tamer</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./js/nebulas.js"></script>
+    <script src="./js/nebPay.js"></script>
+    
+    <script src="./js/nasApi.js"></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script>
+    </script>
   </head>
   <body>
     <noscript>
@@ -40,5 +53,27 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <div id="modal" class="modal modal-fixed-footer" style="color: #000;">
+      <div class="modal-content">
+        <h5 id="modal-title">
+          
+        </h5>
+        <div id="modal-content">
+            
+        </div>
+      </div>
+      <div id="modal-footer" class="modal-footer" style="padding-right: 30px;">
+        <a href="javascript:void()" id="modal-sub"  class="modal-action modal-close waves-effect waves-green btn-flat " style="margin-right: 10px;">confirm</a>
+        <a href="javascript:void()"  class="modal-action modal-close waves-effect waves-green btn-flat " style="background-color: grey;">cancel</a>
+      </div>
+    </div>
+    <script>
+      $('#modal').modal();
+      $(function(){
+          if(validateNaswallet() !== true && location.href.indexOf('home')<0){
+              window.location.href = '/home.html'
+          }
+      })
+    </script>
   </body>
 </html>

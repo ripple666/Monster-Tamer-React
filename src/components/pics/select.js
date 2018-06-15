@@ -71,14 +71,14 @@ export class Myselect extends Component {
 				<div>
 					<ul className="select-ul my-scroll"  style={{height:'0'}}>
 						{props.select.options.map((option,idx) =>
-							<li onClick={e =>this.setOption(e,idx,option.id)} key={option.id}>
+							<li onClick={e =>this.setOption(e,idx,option.value)} key={idx}>
 								{option.name}
 							</li>
 						)}
 					</ul>
 					<ul className="select-ul-temp"  style={{left:'-99999px',position:'absolute'}}>
-						{props.select.options.map((option) =>
-							<li key={option.id}>
+						{props.select.options.map((option,i) =>
+							<li key={i}>
 								{option.name}
 							</li>
 						)}
